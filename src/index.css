@@ -1,0 +1,171 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --accent-color: #00b4d8;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --font-family: "Inter", system-ui, -apple-system, sans-serif;
+  --transition-speed: 0.3s;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --accent-color: #0096c7;
+  --text-primary: #1a1a1a;
+  --text-secondary: #5a5a5a;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .glass {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GPU Acceleration & Scroll Performance */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  /* Scroll performance optimizations */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-speed);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+section {
+  scroll-margin-top: 80px; /* Offset for the fixed header (70px + 10px breathing room) */
+  /* Hint browser for better scroll performance */
+  contain: layout;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Responsive Utilities */
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  
+  h1 { font-size: 2.5rem !important; }
+  h2 { font-size: 2rem !important; }
+  
+  .glass {
+    backdrop-filter: blur(5px);
+  }
+}
+
+/* Optimized Mascot Animations - Runs on Compositor Thread */
+@keyframes mascot-bob {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes mascot-squash {
+  0% { transform: scale(1, 1); }
+  50% { transform: scale(1.02, 0.98); }
+  100% { transform: scale(1, 1); }
+}
+
+.mascot-float {
+  /* Combine animations efficiently */
+  animation: mascot-bob 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+.mascot-squash {
+  animation: mascot-squash 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Pause animations when scrolling to save resources */
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+/* Optimized Sticker Explosion */
+@keyframes explode {
+  0% { 
+    transform: translate3d(0, 0, 0) scale(0) rotate(0deg); 
+    opacity: 0; 
+  }
+  15% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.5) rotate(0deg);
+  }
+  100% { 
+    transform: translate3d(var(--tx), var(--ty), 0) scale(0.5) rotate(var(--r)); 
+    opacity: 0; 
+  }
+}
+
+.sticker-enabled {
+  animation: explode 2s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards;
+  will-change: transform, opacity;
+  /* Hardware acceleration hints */
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
