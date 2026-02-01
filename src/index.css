@@ -169,3 +169,188 @@ section {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-color);
 }
+
+/* Slime Character Styles */
+.slime {
+  width: 60px;
+  height: 60px;
+  border-radius: 50% 50% 45% 45%;
+  background: linear-gradient(135deg, #4ade80, #22c55e, #16a34a);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.4),
+              0 0 40px rgba(74, 222, 128, 0.2),
+              0 0 60px rgba(74, 222, 128, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slime:hover {
+  transform: scale(1.1);
+}
+
+.slime.dragging {
+  cursor: grabbing;
+}
+
+/* Slime Eyes */
+.eye-left, .eye-right {
+  position: absolute;
+  top: 40%;
+  font-size: 16px;
+  color: white;
+  user-select: none;
+}
+
+.eye-left {
+  left: 30%;
+}
+
+.eye-right {
+  right: 30%;
+}
+
+/* Slime Personalities */
+.slime.happy {
+  background: linear-gradient(135deg, #4ade80, #22c55e, #16a34a);
+}
+
+.slime.excited {
+  background: linear-gradient(135deg, #f59e0b, #f97316, #ea580c);
+  animation: bounce 0.5s infinite;
+}
+
+.slime.curious {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6, #2563eb);
+}
+
+.slime.sleepy {
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6, #7c3aed);
+  opacity: 0.8;
+}
+
+.slime.angry {
+  background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
+}
+
+.slime.surprised {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+}
+
+.slime.confused {
+  background: linear-gradient(135deg, #9ca3af, #6b7280, #4b5563);
+}
+
+.slime.love {
+  background: linear-gradient(135deg, #f472b6, #ec4899, #db2777);
+}
+
+.slime.shine {
+  background: linear-gradient(135deg, #fde047, #facc15, #eab308);
+  box-shadow: 0 0 30px rgba(253, 224, 71, 0.6);
+}
+
+/* Slime Dialog */
+.slime-dialog {
+  position: fixed;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 15px;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 2px solid #4ade80;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000001;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slime-dialog.show {
+  opacity: 1;
+}
+
+.slime-dialog::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+}
+
+.slime-dialog.angry {
+  border-color: #ef4444;
+  animation: shake 0.3s infinite;
+}
+
+.slime-dialog.excited {
+  border-color: #f59e0b;
+}
+
+.slime-dialog.curious {
+  border-color: #60a5fa;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Particles */
+.particle {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 1000000;
+  animation: particle-float 1s ease-out forwards;
+}
+
+@keyframes particle-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.5);
+  }
+}
+
+.particle.heart {
+  color: #f472b6;
+}
+
+.particle.star {
+  color: #fbbf24;
+}
+
+.particle.sparkle {
+  color: #60a5fa;
+}
+
+.particle.bubble {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
