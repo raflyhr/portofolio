@@ -22,7 +22,7 @@ import vscodeIcon from './assets/images/vscode.png';
 import { Github } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BackToTop from './components/BackToTop';
-import Mascot from './components/Mascot';
+
 
 import LoadingScreen from './components/LoadingScreen';
 
@@ -830,7 +830,7 @@ function App() {
         </p>
       </footer>
       
-      <Mascot isMobile={isMobile} />
+
       
           </motion.div>
         )}
